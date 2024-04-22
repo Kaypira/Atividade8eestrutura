@@ -1,0 +1,54 @@
+```java
+import java.util.Scanner;
+
+class Aluno {
+    String nome;
+    double notaFinal;
+    Aluno proximo;
+    Aluno anterior;
+
+    public Aluno(String nome, double notaFinal) {
+        this.nome = nome;
+        this.notaFinal = notaFinal;
+        this.proximo = null;
+        this.anterior = null;
+    }
+}
+
+public class CadastroAlunos {
+    static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) {
+        Aluno primeiroAluno = null;
+        Aluno ultimoAluno = null;
+
+        for (int i = 0; i < 6; i++) {
+            System.out.println("Cadastro do aluno #" + (i+1));
+            System.out.print("Nome: ");
+            String nome = sc.nextLine();
+            System.out.print("Nota final: ");
+            double notaFinal = sc.nextDouble();
+            sc.nextLine();
+
+            Aluno novoAluno = new Aluno(nome, notaFinal);
+
+            if (primeiroAluno == null) {
+                primeiroAluno = novoAluno;
+                ultimoAluno = novoAluno;
+            } else {
+                ultimoAluno.proximo = novoAluno;
+                novoAluno.anterior = ultimoAluno;
+                ultimoAluno = novoAluno;
+            }
+        }
+
+        System.out.println("\nLista de Alunos cadastrados:");
+        Aluno alunoAtual = primeiroAluno;
+        while (alunoAtual != null) {
+            System.out.println("Nome: " + alunoAtual.nome + " - Nota Final: " + alunoAtual.notaFinal);
+            alunoAtual = alunoAtual.proximo;
+        }
+    }
+}
+```
+Este programa em Java permite cadastrar 6 alunos com seus respectivos nomes e notas finais, armazenando os dados em uma lista duplamente encadeada. No final, os alunos cadastrados são exibidos na ordem em que foram inseridos.
