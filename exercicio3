@@ -1,0 +1,66 @@
+Segue um exemplo de programa em Java que recebe 20 números do usuário e armazena em uma lista simplesmente encadeada ordenada:
+
+```java
+import java.util.Scanner;
+
+class No {
+    int numero;
+    No proximo;
+
+    public No(int numero) {
+        this.numero = numero;
+        this.proximo = null;
+    }
+}
+
+class ListaSimplesmenteEncadeada {
+    private No inicio;
+
+    public ListaSimplesmenteEncadeada() {
+        this.inicio = null;
+    }
+
+    public void inserirOrdenado(int numero) {
+        No novoNo = new No(numero);
+
+        if (inicio == null || inicio.numero >= numero) {
+            novoNo.proximo = inicio;
+            inicio = novoNo;
+        } else {
+            No atual = inicio;
+            while (atual.proximo != null && atual.proximo.numero < numero) {
+                atual = atual.proximo;
+            }
+            novoNo.proximo = atual.proximo;
+            atual.proximo = novoNo;
+        }
+    }
+
+    public void exibirLista() {
+        No atual = inicio;
+        while (atual != null) {
+            System.out.print(atual.numero + " ");
+            atual = atual.proximo;
+        }
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ListaSimplesmenteEncadeada lista = new ListaSimplesmenteEncadeada();
+        Scanner scanner = new Scanner(System.in);
+
+        for (int i = 0; i < 20; i++) {
+            System.out.print("Digite um número: ");
+            int numero = scanner.nextInt();
+            lista.inserirOrdenado(numero);
+        }
+
+        System.out.println("Números na lista ordenada:");
+        lista.exibirLista();
+
+        scanner.close();
+    }
+}
+```
