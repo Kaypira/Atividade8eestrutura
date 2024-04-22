@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+class Produto {
+    int codigo;
+    double preco;
+    int quantidade;
+    Produto proximo;
+
+    public Produto(int codigo, double preco, int quantidade) {
+        this.codigo = codigo;
+        this.preco = preco;
+        this.quantidade = quantidade;
+        this.proximo = null;
+    }
+}
+
+class ListaProdutos {
+    Produto inicio;
+    int tamanho;
+
+    public ListaProdutos() {
+        this.inicio = null;
+        this.tamanho = 0;
+    }
+
+    public void inserir(int codigo, double preco, int quantidade) {
+        Produto novoProduto = new Produto(codigo, preco, quantidade);
+
+        if (inicio == null) {
+            inicio = novoProduto;
+        } else {
+            Produto aux = inicio;
+            while (aux.proximo != null) {
+                aux = aux.proximo;
+            }
+            aux.proximo = novoProduto;
+        }
+
+        tamanho++;
+    }
+
+    public void imprimirProdutos() {
+        Produto aux = inicio;
+        System.out.println("Lista de Produtos:");
+        while (aux != null) {
+            System.out.println("Código: " + aux.codigo);
+            System.out.println("Preço: R$ " + aux.preco);
+            System.out.println("Quantidade: " + aux.quantidade);
+            System.out.println("----------------------");
+            aux = aux.proximo;
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        ListaProdutos listaProdutos = new ListaProdutos();
+
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Cadastre o produto " + (i + 1) + ":");
+            System.out.print("Código: ");
+            int codigo = sc.nextInt();
+            System.out.print("Preço: R$ ");
+            double preco = sc.nextDouble();
+            System.out.print("Quantidade: ");
+            int quantidade = sc.nextInt();
+
+            listaProdutos.inserir(codigo, preco, quantidade);
+        }
+
+        listaProdutos.imprimirProdutos();
+    }
+}
