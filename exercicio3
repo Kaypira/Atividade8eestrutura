@@ -1,6 +1,4 @@
-Segue um exemplo de programa em Java que recebe 20 números do usuário e armazena em uma lista simplesmente encadeada ordenada:
 
-```java
 import java.util.Scanner;
 
 class No {
@@ -63,4 +61,4 @@ public class Main {
         scanner.close();
     }
 }
-```
+
